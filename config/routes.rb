@@ -1,4 +1,6 @@
 Mhd2012::Application.routes.draw do
+  match 'hack' => 'hack#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
