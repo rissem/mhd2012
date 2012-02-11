@@ -1,3 +1,4 @@
+<%= @song %>
 <div id="api"></div>
 <img id="art" src="" height="200" width="200" style="float:left;margin-right:20px;">
 <div>
@@ -16,3 +17,8 @@
   </div>
 </div>
 
+<script type="text/javascript">
+  $('#api').bind('ready.rdio', function() {
+    $(this).rdio().play('<%= @song["foreign_ids"][0]["foreign_id"].split(":")[-1]%>');
+  });
+</script>
