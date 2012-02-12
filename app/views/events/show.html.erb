@@ -1,5 +1,54 @@
 <h1>Event</h1>
-<%= @event.artist_songs %>
+<div id="api"></div>
+<img id="art" src="" height="200" width="200" style="float:left;margin-right:20px;">
+<div>
+  <div><b>Track: </b><span id="track"></span></div>
+  <div><b>Album: </b><span id="album"></span></div>
+  <div><b>Artist: </b><span id="artist"></span></div>
+  <div><b>Position: </b>
+    <span style="display:inline-block;width:200px;border:1px solid black;">
+      <span id="position" style="display:inline-block;background-color:#666">&nbsp;</span>
+  </span></div>
+  <div>
+    <button id="previous">&lt;&lt;</button>
+    <button id="play">|&gt;</button>
+    <button id="pause">||</button>
+    <button id="next">&gt;&gt;</button>
+  </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+<hr />
+
+<% @event.artist_albums.each do |album| %>
+<h2><%= album["info"]["name"] %> - <%= album["info"]["artist"] %> <%= album["info"]["displayDate"] %></h2>
+<img src="http://ak.rdio.com/_is/?m=<%= album['info']['baseIcon'] %>" />
+<ol>
+<% album["tracks"].each do |track| %>
+<li id="<%= track["key"] %>"><%= track["name"] %>
+<% end %>
+</ol>
+<hr />
+<% end %>
+
 <hr />
 <%= @event.artist_info %>
 
+<!--
+<script type="text/javascript">
+  $(document).ready(function() {
+    console.log("document is ready");
+    $('#api').bind('ready.rdio', function() {
+      $(this).rdio().play('t12687192');
+    });
+  }
+</script>
+-->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#api').bind('ready.rdio', function() {
+    console.log("hello");
+    $(this).rdio().play("t15558053");
+  });
+  });
+</script>

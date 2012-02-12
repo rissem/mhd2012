@@ -23,7 +23,7 @@ class Event
     return @artist_info
   end
 
-  def artist_songs
+  def artist_albums
     rdio_artist_id = artist_info["foreign_ids"][0]["foreign_id"].split(":")[-1]
     rdio = Rdio.new(["qctgwuaxasv6jp67wurqxuuf", "VCtx6nCTZy"])
     track_response = rdio.call("getTracksForArtist", {artist:rdio_artist_id, count:1000})
@@ -51,7 +51,7 @@ class Event
 
     sorted_albums = []
     albums.each do |album_name, album|
-      sorted_albums << album
+      sorted_albums << album if album["info"]
     end
 
     sorted_albums.sort! do |album1, album2|
