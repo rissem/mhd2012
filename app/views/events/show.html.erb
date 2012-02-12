@@ -1,4 +1,4 @@
-<h1>Event</h1>
+<h1><%=@event.data["EventGroupName"] %> @ <%= @event.data["VenueName"] %></h1>
 <div id="api"></div>
 <img id="art" src="" height="200" width="200" style="float:left;margin-right:20px;">
 <div>
@@ -24,7 +24,9 @@
 <img src="http://ak.rdio.com/_is/?m=<%= album['info']['baseIcon'] %>" />
 <ol>
 <% album["tracks"].each do |track| %>
-<li> <a href="#" onclick="$('#api').rdio().play('<%= track["key"]%>'); return false"><%= track["name"] %></a>
+<li><% if track["canSample"] %> <a href="#" onclick="$('#api').rdio().play('<%= track["key"]%>'); return false"> <% end %>
+    <%= track["name"] %>
+ <% if track["canSample"] %></a><% end %>
 <% end %>
 </ol>
 <hr />
@@ -47,7 +49,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
   $('#api').bind('ready.rdio', function() {
-   $(this).rdio().play("t15558053");
+//   $(this).rdio().play("t15558053");
   });
   });
 </script>
