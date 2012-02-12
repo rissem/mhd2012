@@ -27,7 +27,7 @@ module Echonest
     def self.find_songs(artist_id)
       Rails.logger.info "getting songs for artist id #{artist_id}"
       puts "getting songs for artist id #{artist_id}"
-      response =  api("song/search", {results: 100, artist_id:artist_id, limit:true, bucket:["audio_summary","tracks", "song_hotttnesss"]})
+      response =  api("song/search", {results: 1000, artist_id:artist_id, limit:true, bucket:["audio_summary","tracks", "song_hotttnesss"]})
       return response["response"]["songs"]
     end
 

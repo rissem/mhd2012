@@ -44,6 +44,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
+    oauth (0.4.5)
     polyglot (0.3.3)
     rack (1.2.5)
     rack-mount (0.6.14)
@@ -92,6 +93,7 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
+  oauth
   rails (= 3.0.9)
   rspec-rails
   sqlite3
