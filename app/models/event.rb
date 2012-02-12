@@ -18,7 +18,12 @@ class Event
   end
 
   def artist_info
-    Echonest::Api.find_artist_by_seatwave_id(data["EventGroupId"])
+    @artist_info = Echonest::Api.find_artist_by_seatwave_id(data["EventGroupId"]) unless @artist_info
+    return @artist_info
+  end
+
+  def artist_songs
+    Echonest::Api.find_songs(artist_info["id"])
   end
 end
 

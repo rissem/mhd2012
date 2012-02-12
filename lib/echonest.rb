@@ -24,13 +24,21 @@ module Echonest
       response = JSON.parse(open(url).read)
     end
 
+    def self.find_songs(artist_id)
+      Rails.logger.info "getting songs for artist id #{artist_id}"
+      puts "getting songs for artist id #{artist_id}"
+      response =  api("song/search", {results: 100, artist_id:artist_id, limit:true, bucket:["audio_summary","tracks", "song_hotttnesss"]})
+      return response["response"]["songs"]
+    end
+
     def self.find_song(artist, title)
       response =  api("song/search", {results: 1, artist:artist, title:title, limit:true})
       return response["response"]["songs"][0]
     end
 
     def self.find_artist_by_seatwave_id(seatwave_id)
-      api("artist/profile", {id: "seatwave:artist:#{seatwave_id}", bucket:["blogs","biographies", "familiarity", "hotttnesss", "images", "news", "reviews"]}, false)
+      response = api("artist/profile", {id: "seatwave:artist:#{seatwave_id}", bucket:["blogs","biographies", "familiarity", "hotttnesss", "images", "news", "reviews"]}, false)
+      return response["response"]["artist"]
     end
   end
 end
