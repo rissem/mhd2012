@@ -24,7 +24,7 @@
 <img src="http://ak.rdio.com/_is/?m=<%= album['info']['baseIcon'] %>" />
 <ol>
 <% album["tracks"].each do |track| %>
-<li id="<%= track["key"] %>"><%= track["name"] %>
+<li> <a href="#" onclick="$('#api').rdio().play('<%= track["key"]%>'); return false"><%= track["name"] %></a>
 <% end %>
 </ol>
 <hr />
@@ -47,8 +47,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
   $('#api').bind('ready.rdio', function() {
-    console.log("hello");
-    $(this).rdio().play("t15558053");
+   $(this).rdio().play("t15558053");
   });
   });
 </script>
