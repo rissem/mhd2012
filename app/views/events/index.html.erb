@@ -2,8 +2,10 @@
 
 <ul>
 <% @events.each do |event| %>
-<li>
-<%= event %>
+<li> <%= event %>
+  <a href="/events/<%= event["Id"] %>">
+    <%= event["EventGroupName"] %> @ <%= event["VenueName"] %>
+ </a>
 </li>
 <% end %>
 </ul>
