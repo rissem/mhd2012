@@ -23,7 +23,7 @@ $(document).ready(function() {
     });
     // this is a valid playback token for localhost.
     // but you should go get your own for your own domain.
-    $('#api').rdio('GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=');
+    $('#api').rdio(playbackToken);
 
     $('#previous').click(function() { $('#api').rdio().previous(); });
     $('#play').click(function() { $('#api').rdio().play(); });
