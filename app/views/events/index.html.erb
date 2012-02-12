@@ -1,11 +1,18 @@
-<h1>Events</h1>
+<h1>Events in <%= @city %></h1>
 
-<ul>
+<ul style="list-style-type:none;">
 <% @events.each do |event| %>
-<li> <%= event %>
+
+<li> <!--<%= event %>-->
+ <img style="float:left; width: 350px " src="<%= event['EventGroupImageURL'] %>" />
+  <div style="float:left; padding-left:10px; width:400px">
+  <%= convert(event["Date"]).to_formatted_s(:long) %><br />
   <a href="/events/<%= event["Id"] %>">
-    <%= event["EventGroupName"] %> @ <%= event["VenueName"] %>
+  <%= event["EventGroupName"] %> @ <%= event["VenueName"] %>
+  </div>
  </a>
 </li>
+<div style="clear:both">&nbsp;</div>
+<br />
 <% end %>
 </ul>
