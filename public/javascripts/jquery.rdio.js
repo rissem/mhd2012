@@ -820,6 +820,7 @@ var swfobject = function() {
     };
     var params = {'allowScriptAccess': 'always'};
     var attributes = {};
+//    swfobject.embedSWF('http://www.rdio.com/api/swf/?enableLogging=1', id, 1, 1, '9.0.0', '', flashvars, params, attributes);
     swfobject.embedSWF('http://www.rdio.com/api/swf/', id, 1, 1, '9.0.0', '', flashvars, params, attributes);
 
     // build a wrapper object to dispatch method calls into the SWF

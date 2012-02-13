@@ -29,4 +29,42 @@ $(document).ready(function() {
     $('#play').click(function() { $('#api').rdio().play(); });
     $('#pause').click(function() { $('#api').rdio().pause(); });
     $('#next').click(function() { $('#api').rdio().next(); });
+
+    artist_query_string = ""
+    for (var i=0; i < top_five.length; i++)
+    {
+        artist_query_string += "&artist_id=seatwave:artist:" + top_five[i];
+    }
+
+    function getSong(sessionId) {
+        $.get("http://developer.echonest.com/api/v4/playlist/dynamic?api_key=N6E4NIOVYMTHNDM8J" + "&format=json&session_id=" + sessionId, function(response) {
+            var rdio_id = response["response"]["songs"][0]["foreign_ids"][0]["foreign_id"];
+            rdio_id = rdio_id.split(":")[2];
+            console.log(rdio_id);
+            $("#api").rdio().play(rdio_id)
+            $('#api').bind('playStateChanged.rdio', function(e, playState) {
+                console.log("play state change!", playState);
+                if (playState == 2) { // paused
+                    getSong(response["response"]["session_id"]);
+                }
+            });            
+        });
+    }
+
+    $.get("http://developer.echonest.com/api/v4/playlist/dynamic?api_key=N6E4NIOVYMTHNDM8J&bucket=id:rdio-us-streaming&" + artist_query_string + "&format=json&limit=true&type=artist-radio",
+          function(response) {
+              console.log("response", response);
+              console.log("session id = " + response["response"]["session_id"]);
+              var rdio_id = response["response"]["songs"][0]["foreign_ids"][0]["foreign_id"];
+              rdio_id = rdio_id.split(":")[2];
+              console.log(rdio_id);
+              $("#api").rdio().play(rdio_id)
+              $('#api').bind('playStateChanged.rdio', function(e, playState) {
+                  console.log("play state change!", playState);
+                  if (playState == 2) { // paused
+                      //getSong(response["response"]["session_id"]);
+                  }
+              });
+          });
 });
+
